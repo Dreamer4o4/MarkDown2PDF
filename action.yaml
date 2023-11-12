@@ -1,0 +1,31 @@
+name: 'Pandoc Conversion'
+inputs:
+  dockerVolumePath:
+    required: false
+    default: '/github/workspace'
+  inputPath:
+    required: true
+    default: 'input'
+  outputPath:
+    required: false
+    default: 'output/resume.pdf'
+  cssPath:
+    required: false
+    default: 'style/github.css'
+  inputFormat:
+    required: false
+    default: 'markdown'
+  outputFormat:
+    required: false
+    default: 'html'
+  
+runs:
+  using: 'docker'
+  image: docker://ghcr.io/dreamer4o4/markdownresumetool:main
+  args: 
+    - --standalone
+    - --from=${{ inputs.inputFormat }}
+    - --to=${{ inputs.outputFormat }}
+    - --css=${{ inputs.dockerVolumePath }}/${{ inputs.cssPath }}
+    - ${{ inputs.dockerVolumePath }}/${{ inputs.inputPath }}
+    - --output=${{ inputs.dockerVolumePath }}/${{ inputs.outputPath }}
