@@ -16,8 +16,17 @@ jobs:
   convert_via_pandoc:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Files
+      - name: Checkout Files In Caller Repo
         uses: actions/checkout@v4.1.0
+      - name: Checkout Styles In Tool Repo
+        uses: actions/checkout@v4.1.0
+        with:
+          repository: Dreamer4o4/MarkdownResumeTool
+          path: tool
+          sparse-checkout: style
+          sparse-checkout-cone-mode: false
+      - name: Copy Style
+        run: cp -r tool/style ./
       - name: Create Output Dir
         run: mkdir output
       - name: Convert Action

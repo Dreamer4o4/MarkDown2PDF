@@ -11,7 +11,7 @@ inputs:
     default: 'output/resume.pdf'
   cssPath:
     required: false
-    default: 'style/github.css'
+    default: 'style/markdown.css'
   inputFormat:
     required: false
     default: 'markdown'
